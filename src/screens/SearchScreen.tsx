@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { AppHeader } from '@/components/PhoneFrame';
-import { Users, MapPin, Clock, Search as SearchIcon, SlidersHorizontal } from 'lucide-react';
+import { Users, MapPin, Clock, Search as SearchIcon, SlidersHorizontal, CalendarDays, Sparkles } from 'lucide-react';
 
 export function SearchScreen() {
-  const { rooms, navigate, setSelectedRoom, currentUser, logout } = useApp();
+  const { rooms, navigate, setSelectedRoom } = useApp();
   const [searchText, setSearchText] = useState('');
   const [capacityFilter, setCapacityFilter] = useState<number | null>(null);
   const [showFilters, setShowFilters] = useState(false);
@@ -27,21 +27,19 @@ export function SearchScreen() {
     <div className="flex flex-col h-full bg-gray-50">
       <AppHeader showBack={false} />
 
-      {/* User bar */}
-      <div className="px-4 py-2.5 bg-white border-b border-gray-100 flex items-center gap-3 shrink-0">
-        <img src={currentUser?.avatarUrl} alt="avatar" className="w-9 h-9 rounded-full object-cover" />
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-gray-900 truncate">{currentUser?.name}</p>
-          <p className="text-xs text-gray-400 truncate">{currentUser?.email}</p>
+      <div className="px-4 pt-5 pb-4 bg-gradient-to-br from-red-50 via-white to-amber-50 border-b border-red-100/70 shrink-0">
+        <p className="text-[11px] uppercase tracking-[0.16em] text-kku-red font-bold">Daily overview</p>
+        <h2 className="mt-1 text-[27px] leading-tight font-black tracking-tight text-gray-900">ภาพรวมการจองวันนี้<span className="text-kku-red">.</span></h2>
+        <p className="text-sm text-gray-500 mt-1 flex items-center gap-1.5"><CalendarDays size={15} className="text-kku-red" />{new Intl.DateTimeFormat('th-TH', { dateStyle: 'full' }).format(new Date())}</p>
+        <div className="mt-4 rounded-2xl bg-kku-red px-4 py-3.5 text-white shadow-lg shadow-red-900/15 flex items-center gap-3 overflow-hidden relative">
+          <div className="absolute -right-6 -top-8 w-28 h-28 rounded-full bg-white/10" />
+          <Sparkles size={22} className="shrink-0 text-kku-gold" />
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-bold text-white/75">พร้อมให้บริการ</p>
+            <p className="text-base font-bold truncate">ค้นหาห้องที่เหมาะกับการประชุมของคุณ</p>
+          </div>
+          <span className="text-2xl font-black">{rooms.length}</span>
         </div>
-        {currentUser?.role === 'admin' && (
-          <span className="text-[10px] font-bold text-kku-red bg-red-50 px-2 py-1 rounded-full border border-red-100">
-            ผู้ดูแล
-          </span>
-        )}
-        <button onClick={logout} className="text-[10px] text-gray-400 hover:text-gray-600 underline">
-          ออกจากระบบ
-        </button>
       </div>
 
       {/* Search controls */}

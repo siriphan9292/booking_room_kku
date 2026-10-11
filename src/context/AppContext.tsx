@@ -42,7 +42,7 @@ const adminScreens: Screen[] = ['admin', 'checklist', 'notifications'];
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [screen, setScreen] = useState<Screen>('login');
-  const [screenHistory, setScreenHistory] = useState<Screen[]>([]);
+  const [, setScreenHistory] = useState<Screen[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [bookings, setBookings] = useState<Booking[]>(mockBookings);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);

@@ -1,5 +1,5 @@
 import { useApp } from '@/context/AppContext';
-import { CalendarDays, LogIn, ShieldCheck } from 'lucide-react';
+import { CalendarDays, ShieldCheck } from 'lucide-react';
 
 export function LoginScreen() {
   const { loginAs } = useApp();

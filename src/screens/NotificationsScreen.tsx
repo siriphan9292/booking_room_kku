@@ -96,7 +96,6 @@ function NotificationCard({
   onMarkRead: () => void;
 }) {
   const isRejection = notif.type === 'rejection';
-  const accentColor = isRejection ? 'red' : 'amber';
   const Icon = isRejection ? X : Ban;
   const title = isRejection ? 'คำขอถูกปฏิเสธ' : 'ผู้ใช้ยกเลิกการจอง';
 

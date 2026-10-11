@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { AppHeader } from '@/components/PhoneFrame';
 import { StatusBadge, Button, Modal, EmptyState } from '@/components/ui';
-import { MapPin, Clock, Users, Calendar, Check, X, FileText, Mail, AlertCircle, ShieldCheck, ClipboardList, Bell } from 'lucide-react';
+import { MapPin, Clock, Users, Calendar, Check, X, FileText, Mail, AlertCircle, ShieldCheck, ClipboardList } from 'lucide-react';
 import type { Booking } from '@/types';
 
 export function AdminScreen() {
-  const { bookings, approveBooking, rejectBooking, navigate, setSelectedBookingForChecklist, currentUser, logout, unreadNotificationCount } = useApp();
+  const { bookings, approveBooking, rejectBooking, navigate, setSelectedBookingForChecklist, currentUser } = useApp();
   const [rejectTarget, setRejectTarget] = useState<Booking | null>(null);
   const [rejectReason, setRejectReason] = useState('');
   const [filter, setFilter] = useState<'pending' | 'approved' | 'rejected' | 'all'>('pending');
@@ -48,29 +48,6 @@ export function AdminScreen() {
   return (
     <div className="flex flex-col h-full bg-gray-50">
       <AppHeader showBack={false} title="แดชบอร์ดผู้ดูแล" />
-
-      {/* Admin bar */}
-      <div className="px-4 py-2.5 bg-white border-b border-gray-100 flex items-center gap-3 shrink-0">
-        <img src={currentUser.avatarUrl} alt="avatar" className="w-9 h-9 rounded-full object-cover" />
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-gray-900 truncate">{currentUser.name}</p>
-          <p className="text-xs text-gray-400 truncate">{currentUser.email}</p>
-        </div>
-        <span className="text-[10px] font-bold text-kku-red bg-red-50 px-2 py-1 rounded-full border border-red-100">
-          ผู้ดูแล
-        </span>
-        <button onClick={() => navigate('notifications')} className="relative p-1.5 -mr-1 text-gray-500 hover:text-kku-red transition-colors">
-          <Bell size={20} />
-          {unreadNotificationCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-              {unreadNotificationCount > 9 ? '9+' : unreadNotificationCount}
-            </span>
-          )}
-        </button>
-        <button onClick={logout} className="text-[10px] text-gray-400 hover:text-gray-600 underline">
-          ออกจากระบบ
-        </button>
-      </div>
 
       {/* Stats */}
       <div className="px-4 py-3 bg-white border-b border-gray-100 shrink-0">
